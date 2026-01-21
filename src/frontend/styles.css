@@ -1,0 +1,673 @@
+/* ============================================
+   Global Styles and CSS Variables
+   ============================================ */
+
+/* CSS custom properties (variables) for easy theme customization */
+:root {
+    /* Primary color palette - used for main actions and highlights */
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --primary-light: #818cf8;
+    
+    /* Secondary color palette - used for secondary actions */
+    --secondary-color: #64748b;
+    --secondary-hover: #475569;
+    
+    /* Background colors - creates depth and hierarchy */
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --bg-card: #1e293b;
+    
+    /* Text colors - ensures good readability */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    
+    /* Status colors - for success, error, and warning messages */
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    
+    /* Border and shadow styles */
+    --border-radius: 12px;
+    --border-color: #334155;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.3);
+    
+    /* Spacing and sizing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    /* Transition timing for smooth animations */
+    --transition: all 0.3s ease;
+}
+
+/* Reset default browser styles for consistent appearance */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Includes padding and border in element width */
+}
+
+/* Body styling - sets the overall page appearance */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif; /* Modern font stack for cross-platform consistency */
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-primary);
+    min-height: 100vh; /* Ensures full viewport height */
+    line-height: 1.6; /* Improves text readability */
+    -webkit-font-smoothing: antialiased; /* Smooths fonts on macOS */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Container and Layout
+   ============================================ */
+
+/* Main container that centers and constrains content */
+.container {
+    max-width: 1200px; /* Maximum width for large screens */
+    margin: 0 auto; /* Centers the container horizontally */
+    padding: var(--spacing-lg); /* Adds padding around content */
+}
+
+/* Header section styling */
+.header {
+    text-align: center; /* Centers header content */
+    margin-bottom: var(--spacing-xl); /* Adds space below header */
+    padding: var(--spacing-lg) 0; /* Adds vertical padding */
+}
+
+/* Main title styling */
+.title {
+    font-size: 2.5rem; /* Large, prominent title */
+    font-weight: 700; /* Bold weight for emphasis */
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    -webkit-background-clip: text; /* Clips background to text */
+    -webkit-text-fill-color: transparent; /* Makes text transparent to show gradient */
+    background-clip: text;
+    margin-bottom: var(--spacing-xs); /* Small margin below title */
+}
+
+/* Subtitle styling */
+.subtitle {
+    color: var(--text-secondary); /* Muted text color */
+    font-size: 1.1rem; /* Slightly larger than body text */
+}
+
+/* ============================================
+   Authentication Section
+   ============================================ */
+
+/* Container for authentication forms */
+.auth-section {
+    max-width: 450px; /* Constrains form width for better UX */
+    margin: var(--spacing-xl) auto; /* Centers the section */
+    background: var(--bg-card); /* Card background color */
+    border-radius: var(--border-radius); /* Rounded corners */
+    padding: var(--spacing-lg); /* Internal padding */
+    box-shadow: var(--shadow-xl); /* Adds depth with shadow */
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+
+/* Tab button container */
+.tab-buttons {
+    display: flex; /* Arranges buttons horizontally */
+    gap: var(--spacing-xs); /* Space between buttons */
+    margin-bottom: var(--spacing-md); /* Space below tabs */
+    background: var(--bg-tertiary); /* Background for tab area */
+    padding: var(--spacing-xs); /* Padding around tabs */
+    border-radius: var(--border-radius); /* Rounded corners */
+}
+
+/* Individual tab button styling */
+.tab-btn {
+    flex: 1; /* Equal width for both buttons */
+    padding: var(--spacing-sm) var(--spacing-md); /* Button padding */
+    background: transparent; /* Transparent by default */
+    border: none; /* No border */
+    color: var(--text-secondary); /* Muted text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: calc(var(--border-radius) - 4px); /* Slightly smaller radius */
+    transition: var(--transition); /* Smooth transitions */
+    font-weight: 500; /* Medium font weight */
+}
+
+/* Active tab button styling */
+.tab-btn.active {
+    background: var(--primary-color); /* Primary color background */
+    color: var(--text-primary); /* Bright text color */
+    box-shadow: var(--shadow-sm); /* Subtle shadow */
+}
+
+/* Hover effect for tab buttons */
+.tab-btn:hover:not(.active) {
+    background: var(--bg-secondary); /* Darker background on hover */
+    color: var(--text-primary); /* Brighter text on hover */
+}
+
+/* Form container styling */
+.form-container {
+    display: none; /* Hidden by default */
+}
+
+/* Active form container */
+.form-container.active {
+    display: block; /* Shown when active */
+    animation: fadeIn 0.3s ease; /* Fade-in animation */
+}
+
+/* Form heading */
+.form-container h2 {
+    margin-bottom: var(--spacing-xs); /* Space below heading */
+    color: var(--text-primary); /* Primary text color */
+}
+
+/* Form description text */
+.form-description {
+    color: var(--text-muted); /* Muted text color */
+    margin-bottom: var(--spacing-md); /* Space below description */
+    font-size: 0.9rem; /* Slightly smaller text */
+}
+
+/* ============================================
+   Form Elements
+   ============================================ */
+
+/* Form styling */
+.form {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    gap: var(--spacing-md); /* Space between form elements */
+}
+
+/* Form group container */
+.form-group {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack label and input vertically */
+    gap: var(--spacing-xs); /* Small gap between label and input */
+}
+
+/* Label styling */
+label {
+    color: var(--text-secondary); /* Secondary text color */
+    font-weight: 500; /* Medium font weight */
+    font-size: 0.9rem; /* Slightly smaller text */
+}
+
+/* Input and textarea styling */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+    padding: var(--spacing-sm); /* Internal padding */
+    background: var(--bg-tertiary); /* Dark background */
+    border: 1px solid var(--border-color); /* Border */
+    border-radius: calc(var(--border-radius) - 4px); /* Rounded corners */
+    color: var(--text-primary); /* Text color */
+    font-size: 1rem; /* Standard font size */
+    transition: var(--transition); /* Smooth transitions */
+    font-family: inherit; /* Inherits font from body */
+}
+
+/* Focus state for inputs */
+input:focus,
+textarea:focus {
+    outline: none; /* Removes default outline */
+    border-color: var(--primary-color); /* Primary color border */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); /* Subtle glow effect */
+}
+
+/* Placeholder text styling */
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted); /* Muted placeholder color */
+}
+
+/* Small helper text */
+small {
+    color: var(--text-muted); /* Muted text color */
+    font-size: 0.8rem; /* Small font size */
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+/* Base button styling */
+.btn {
+    padding: var(--spacing-sm) var(--spacing-md); /* Button padding */
+    border: none; /* No border */
+    border-radius: calc(var(--border-radius) - 4px); /* Rounded corners */
+    font-size: 1rem; /* Standard font size */
+    font-weight: 600; /* Bold font weight */
+    cursor: pointer; /* Pointer cursor */
+    transition: var(--transition); /* Smooth transitions */
+    font-family: inherit; /* Inherits font */
+}
+
+/* Primary button (main actions) */
+.btn-primary {
+    background: var(--primary-color); /* Primary background */
+    color: var(--text-primary); /* Light text */
+    box-shadow: var(--shadow-md); /* Shadow for depth */
+}
+
+/* Primary button hover effect */
+.btn-primary:hover {
+    background: var(--primary-hover); /* Darker on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: var(--shadow-lg); /* Larger shadow on hover */
+}
+
+/* Primary button active state */
+.btn-primary:active {
+    transform: translateY(0); /* Returns to original position */
+}
+
+/* Secondary button (less important actions) */
+.btn-secondary {
+    background: var(--bg-tertiary); /* Tertiary background */
+    color: var(--text-primary); /* Light text */
+    border: 1px solid var(--border-color); /* Border */
+}
+
+/* Secondary button hover effect */
+.btn-secondary:hover {
+    background: var(--secondary-color); /* Secondary color on hover */
+    border-color: var(--secondary-color); /* Matching border */
+}
+
+/* Danger button (delete actions) */
+.btn-danger {
+    background: var(--error-color); /* Error color background */
+    color: var(--text-primary); /* Light text */
+}
+
+/* Danger button hover effect */
+.btn-danger:hover {
+    background: #dc2626; /* Darker red on hover */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+/* ============================================
+   Application Section
+   ============================================ */
+
+/* Hide section by default */
+.hidden {
+    display: none !important; /* Forces element to be hidden */
+}
+
+/* User bar container */
+.user-bar {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Vertical alignment */
+    background: var(--bg-card); /* Card background */
+    padding: var(--spacing-md); /* Internal padding */
+    border-radius: var(--border-radius); /* Rounded corners */
+    margin-bottom: var(--spacing-lg); /* Space below */
+    box-shadow: var(--shadow-md); /* Shadow for depth */
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+
+/* User info container */
+.user-info {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    gap: var(--spacing-xs); /* Small gap */
+}
+
+/* User greeting text */
+.user-greeting {
+    color: var(--text-primary); /* Primary text color */
+    font-size: 1.1rem; /* Slightly larger text */
+}
+
+/* User email text */
+.user-email {
+    color: var(--text-muted); /* Muted text color */
+    font-size: 0.9rem; /* Smaller text */
+}
+
+/* Posts container */
+.posts-container {
+    background: var(--bg-card); /* Card background */
+    border-radius: var(--border-radius); /* Rounded corners */
+    padding: var(--spacing-lg); /* Internal padding */
+    box-shadow: var(--shadow-md); /* Shadow for depth */
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+
+/* Posts header */
+.posts-header {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Vertical alignment */
+    margin-bottom: var(--spacing-lg); /* Space below */
+}
+
+/* Posts header title */
+.posts-header h2 {
+    color: var(--text-primary); /* Primary text color */
+}
+
+/* Posts list container */
+.posts-list {
+    display: grid; /* Grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    gap: var(--spacing-md); /* Space between cards */
+}
+
+/* ============================================
+   Post Cards
+   ============================================ */
+
+/* Individual post card */
+.post-card {
+    background: var(--bg-tertiary); /* Tertiary background */
+    border-radius: var(--border-radius); /* Rounded corners */
+    padding: var(--spacing-md); /* Internal padding */
+    border: 1px solid var(--border-color); /* Subtle border */
+    transition: var(--transition); /* Smooth transitions */
+    box-shadow: var(--shadow-sm); /* Subtle shadow */
+}
+
+/* Post card hover effect */
+.post-card:hover {
+    transform: translateY(-4px); /* Lifts card on hover */
+    box-shadow: var(--shadow-lg); /* Larger shadow */
+    border-color: var(--primary-color); /* Primary color border */
+}
+
+/* Post card header */
+.post-card-header {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between items */
+    align-items: start; /* Align to top */
+    margin-bottom: var(--spacing-sm); /* Space below */
+}
+
+/* Post name/title */
+.post-name {
+    font-size: 1.2rem; /* Larger text */
+    font-weight: 600; /* Bold weight */
+    color: var(--text-primary); /* Primary text color */
+    margin-bottom: var(--spacing-xs); /* Small margin */
+}
+
+/* Post description */
+.post-description {
+    color: var(--text-secondary); /* Secondary text color */
+    margin-bottom: var(--spacing-sm); /* Space below */
+    line-height: 1.5; /* Improved line spacing */
+}
+
+/* Post metadata */
+.post-meta {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Vertical alignment */
+    margin-top: var(--spacing-sm); /* Space above */
+    padding-top: var(--spacing-sm); /* Padding above */
+    border-top: 1px solid var(--border-color); /* Top border */
+}
+
+/* Post age badge */
+.post-age {
+    background: var(--primary-color); /* Primary background */
+    color: var(--text-primary); /* Light text */
+    padding: var(--spacing-xs) var(--spacing-sm); /* Padding */
+    border-radius: calc(var(--border-radius) - 8px); /* Rounded corners */
+    font-size: 0.85rem; /* Smaller text */
+    font-weight: 600; /* Bold weight */
+}
+
+/* Post date */
+.post-date {
+    color: var(--text-muted); /* Muted text color */
+    font-size: 0.85rem; /* Smaller text */
+}
+
+/* Post actions container */
+.post-actions {
+    display: flex; /* Flexbox layout */
+    gap: var(--spacing-xs); /* Small gap between buttons */
+}
+
+/* ============================================
+   Modal
+   ============================================ */
+
+/* Modal overlay (background) */
+.modal {
+    position: fixed; /* Fixed position */
+    top: 0; /* Top of viewport */
+    left: 0; /* Left of viewport */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Above other content */
+    animation: fadeIn 0.3s ease; /* Fade-in animation */
+}
+
+/* Modal content container */
+.modal-content {
+    background: var(--bg-card); /* Card background */
+    border-radius: var(--border-radius); /* Rounded corners */
+    padding: var(--spacing-lg); /* Internal padding */
+    width: 90%; /* 90% of viewport width */
+    max-width: 500px; /* Maximum width */
+    max-height: 90vh; /* Maximum height */
+    overflow-y: auto; /* Scrollable if content overflows */
+    box-shadow: var(--shadow-xl); /* Large shadow */
+    border: 1px solid var(--border-color); /* Subtle border */
+    position: relative; /* For close button positioning */
+    animation: slideUp 0.3s ease; /* Slide-up animation */
+}
+
+/* Modal title */
+.modal-content h3 {
+    margin-bottom: var(--spacing-md); /* Space below */
+    color: var(--text-primary); /* Primary text color */
+}
+
+/* Close modal button */
+.close-modal {
+    position: absolute; /* Absolute positioning */
+    top: var(--spacing-md); /* Distance from top */
+    right: var(--spacing-md); /* Distance from right */
+    font-size: 1.5rem; /* Larger text */
+    color: var(--text-muted); /* Muted color */
+    cursor: pointer; /* Pointer cursor */
+    transition: var(--transition); /* Smooth transitions */
+    width: 30px; /* Fixed width */
+    height: 30px; /* Fixed height */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Vertical alignment */
+    justify-content: center; /* Horizontal alignment */
+    border-radius: 50%; /* Circular shape */
+}
+
+/* Close button hover effect */
+.close-modal:hover {
+    background: var(--bg-tertiary); /* Background on hover */
+    color: var(--text-primary); /* Primary text color */
+}
+
+/* Form actions container */
+.form-actions {
+    display: flex; /* Flexbox layout */
+    gap: var(--spacing-sm); /* Space between buttons */
+    margin-top: var(--spacing-md); /* Space above */
+}
+
+/* ============================================
+   Messages and Notifications
+   ============================================ */
+
+/* Message container */
+.message-container {
+    position: fixed; /* Fixed position */
+    top: var(--spacing-lg); /* Distance from top */
+    right: var(--spacing-lg); /* Distance from right */
+    z-index: 2000; /* Above modal */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack messages vertically */
+    gap: var(--spacing-sm); /* Space between messages */
+}
+
+/* Individual message */
+.message {
+    padding: var(--spacing-md); /* Internal padding */
+    border-radius: var(--border-radius); /* Rounded corners */
+    box-shadow: var(--shadow-lg); /* Large shadow */
+    min-width: 300px; /* Minimum width */
+    animation: slideInRight 0.3s ease; /* Slide-in animation */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Vertical alignment */
+    gap: var(--spacing-sm); /* Space between icon and text */
+}
+
+/* Success message */
+.message.success {
+    background: var(--success-color); /* Success background */
+    color: white; /* White text */
+}
+
+/* Error message */
+.message.error {
+    background: var(--error-color); /* Error background */
+    color: white; /* White text */
+}
+
+/* Loading message */
+.loading-message {
+    text-align: center; /* Centered text */
+    color: var(--text-muted); /* Muted text color */
+    padding: var(--spacing-xl); /* Large padding */
+}
+
+/* Empty state message */
+.empty-state {
+    text-align: center; /* Centered text */
+    color: var(--text-muted); /* Muted text color */
+    padding: var(--spacing-xl); /* Large padding */
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        opacity: 1; /* End visible */
+    }
+}
+
+/* Slide-up animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(20px); /* Start below */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateY(0); /* End in place */
+        opacity: 1; /* End visible */
+    }
+}
+
+/* Slide-in from right animation */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%); /* Start off-screen right */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateX(0); /* End in place */
+        opacity: 1; /* End visible */
+    }
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+/* Tablet and smaller screens */
+@media (max-width: 768px) {
+    /* Reduce container padding */
+    .container {
+        padding: var(--spacing-md); /* Smaller padding */
+    }
+    
+    /* Smaller title */
+    .title {
+        font-size: 2rem; /* Reduced font size */
+    }
+    
+    /* Full-width auth section */
+    .auth-section {
+        max-width: 100%; /* Full width */
+    }
+    
+    /* Stack user bar elements */
+    .user-bar {
+        flex-direction: column; /* Stack vertically */
+        gap: var(--spacing-sm); /* Space between items */
+        align-items: stretch; /* Stretch to full width */
+    }
+    
+    /* Stack posts header */
+    .posts-header {
+        flex-direction: column; /* Stack vertically */
+        gap: var(--spacing-sm); /* Space between items */
+        align-items: stretch; /* Stretch to full width */
+    }
+    
+    /* Single column posts list */
+    .posts-list {
+        grid-template-columns: 1fr; /* Single column */
+    }
+    
+    /* Full-width modal */
+    .modal-content {
+        width: 95%; /* Almost full width */
+        margin: var(--spacing-md); /* Margin around */
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    /* Even smaller title */
+    .title {
+        font-size: 1.5rem; /* Further reduced */
+    }
+    
+    /* Smaller spacing */
+    .container {
+        padding: var(--spacing-sm); /* Minimal padding */
+    }
+    
+    /* Smaller message width */
+    .message {
+        min-width: auto; /* Auto width */
+        width: calc(100% - 2rem); /* Full width minus margin */
+    }
+}

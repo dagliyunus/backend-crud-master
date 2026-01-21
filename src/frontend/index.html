@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for proper page rendering and SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Backend CRUD API Frontend - User Authentication and Post Management">
+    
+    <!-- Page title displayed in browser tab -->
+    <title>CRUD API Dashboard</title>
+    
+    <!-- Link to external stylesheet for styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container that wraps all page content -->
+    <div class="container">
+        
+        <!-- Header section with application title and navigation -->
+        <header class="header">
+            <h1 class="title">📝 CRUD API Dashboard</h1>
+            <p class="subtitle">User Authentication & Post Management System</p>
+        </header>
+
+        <!-- Authentication section - shown when user is not logged in -->
+        <section id="authSection" class="auth-section">
+            
+            <!-- Tab buttons to switch between login and register forms -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
+
+            <!-- Login form container -->
+            <div id="loginForm" class="form-container active">
+                <h2>Welcome Back</h2>
+                <p class="form-description">Sign in to your account to manage posts</p>
+                
+                <!-- Login form with email and password fields -->
+                <form id="loginFormElement" class="form">
+                    <!-- Email input field -->
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="loginEmail" 
+                            placeholder="Enter your email" 
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    
+                    <!-- Password input field -->
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            placeholder="Enter your password" 
+                            required
+                            autocomplete="current-password"
+                            minlength="6"
+                        >
+                    </div>
+                    
+                    <!-- Submit button to trigger login -->
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+            </div>
+
+            <!-- Registration form container -->
+            <div id="registerForm" class="form-container">
+                <h2>Create Account</h2>
+                <p class="form-description">Register a new account to get started</p>
+                
+                <!-- Registration form with username, email, and password fields -->
+                <form id="registerFormElement" class="form">
+                    <!-- Username input field -->
+                    <div class="form-group">
+                        <label for="registerUsername">Username</label>
+                        <input 
+                            type="text" 
+                            id="registerUsername" 
+                            placeholder="Choose a username" 
+                            required
+                            autocomplete="username"
+                            minlength="1"
+                            maxlength="25"
+                        >
+                        <small>1-25 characters</small>
+                    </div>
+                    
+                    <!-- Email input field -->
+                    <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="registerEmail" 
+                            placeholder="Enter your email" 
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    
+                    <!-- Password input field -->
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="registerPassword" 
+                            placeholder="Create a password" 
+                            required
+                            autocomplete="new-password"
+                            minlength="6"
+                            maxlength="50"
+                        >
+                        <small>6-50 characters</small>
+                    </div>
+                    
+                    <!-- Submit button to trigger registration -->
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Main application section - shown when user is logged in -->
+        <section id="appSection" class="app-section hidden">
+            
+            <!-- User info and logout button -->
+            <div class="user-bar">
+                <div class="user-info">
+                    <span class="user-greeting">Welcome, <strong id="currentUsername"></strong>!</span>
+                    <span class="user-email" id="currentUserEmail"></span>
+                </div>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+
+            <!-- Post management section -->
+            <div class="posts-container">
+                
+                <!-- Header for posts section with create button -->
+                <div class="posts-header">
+                    <h2>📋 Posts Management</h2>
+                    <button id="createPostBtn" class="btn btn-primary">+ Create New Post</button>
+                </div>
+
+                <!-- Modal overlay for create/edit post form -->
+                <div id="postModal" class="modal hidden">
+                    <div class="modal-content">
+                        <!-- Close button for modal -->
+                        <span class="close-modal">&times;</span>
+                        <h3 id="modalTitle">Create New Post</h3>
+                        
+                        <!-- Form for creating or editing posts -->
+                        <form id="postForm" class="form">
+                            <!-- Hidden field to store post ID when editing -->
+                            <input type="hidden" id="postId">
+                            
+                            <!-- Name input field -->
+                            <div class="form-group">
+                                <label for="postName">Name</label>
+                                <input 
+                                    type="text" 
+                                    id="postName" 
+                                    placeholder="Enter name" 
+                                    required
+                                >
+                            </div>
+                            
+                            <!-- Description textarea field -->
+                            <div class="form-group">
+                                <label for="postDescription">Description</label>
+                                <textarea 
+                                    id="postDescription" 
+                                    placeholder="Enter description" 
+                                    rows="4"
+                                    required
+                                ></textarea>
+                            </div>
+                            
+                            <!-- Age input field -->
+                            <div class="form-group">
+                                <label for="postAge">Age</label>
+                                <input 
+                                    type="number" 
+                                    id="postAge" 
+                                    placeholder="Enter age" 
+                                    required
+                                    min="1"
+                                    max="150"
+                                >
+                                <small>Must be between 1 and 150</small>
+                            </div>
+                            
+                            <!-- Form action buttons -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Post</button>
+                                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Container for displaying all posts -->
+                <div id="postsList" class="posts-list">
+                    <!-- Posts will be dynamically inserted here by JavaScript -->
+                    <div class="loading-message">Loading posts...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Message container for displaying success/error notifications -->
+        <div id="messageContainer" class="message-container"></div>
+    </div>
+
+    <!-- Link to external JavaScript file that handles all functionality -->
+    <script src="app.js"></script>
+</body>
+</html>
