@@ -20,11 +20,15 @@ class User {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert user
+        // Ensure email is lowercase and trimmed for consistency
+        const normalizedEmail = email.toLowerCase().trim();
+        const normalizedUsername = username.toLowerCase().trim();
+        
         const result = await pool.query(
             `INSERT INTO users (username, email, password, logged_in) 
-             VALUES ($1, LOWER(TRIM($2)), $3, $4) 
+             VALUES ($1, $2, $3, $4) 
              RETURNING id, username, email, created_at, updated_at`,
-            [username.toLowerCase().trim(), email, hashedPassword, loggedIn]
+            [normalizedUsername, normalizedEmail, hashedPassword, loggedIn]
         );
 
         return result.rows[0];
@@ -39,11 +43,15 @@ class User {
             query += `id = $${paramCount}`;
             params.push(id);
         } else if (email) {
-            query += `email = LOWER(TRIM($${paramCount}))`;
-            params.push(email);
+            // Normalize email to lowercase and trim for consistent lookup
+            const normalizedEmail = email.toLowerCase().trim();
+            query += `email = $${paramCount}`;
+            params.push(normalizedEmail);
         } else if (username) {
-            query += `username = LOWER(TRIM($${paramCount}))`;
-            params.push(username);
+            // Normalize username to lowercase and trim for consistent lookup
+            const normalizedUsername = username.toLowerCase().trim();
+            query += `username = $${paramCount}`;
+            params.push(normalizedUsername);
         } else {
             return null;
         }

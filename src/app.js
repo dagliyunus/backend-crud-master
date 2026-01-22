@@ -23,12 +23,24 @@ app.use(express.static(join(__dirname, 'frontend')));
 // Import route handlers - these contain the logic for handling API requests
 import userRouter from './routes/user.route.js';
 import postRouter from './routes/post.route.js';
+import projectRouter from './routes/project.route.js';
+import invitationRouter from './routes/invitation.route.js';
+import notificationRouter from './routes/notification.route.js';
+import taskRouter from './routes/task.route.js';
 
 // Mount API routes - these define the endpoints that the frontend will call
 // All user-related endpoints will be prefixed with /api/v1/users
 app.use("/api/v1/users", userRouter);
 // All post-related endpoints will be prefixed with /api/v1/posts
 app.use("/api/v1/posts", postRouter);
+// All project-related endpoints will be prefixed with /api/v1/projects
+app.use("/api/v1/projects", projectRouter);
+// All invitation-related endpoints will be prefixed with /api/v1/invitations
+app.use("/api/v1/invitations", invitationRouter);
+// All notification-related endpoints will be prefixed with /api/v1/notifications
+app.use("/api/v1/notifications", notificationRouter);
+// All task-related endpoints will be prefixed with /api/v1/tasks
+app.use("/api/v1/tasks", taskRouter);
 
 // Example API route: http://localhost:8000/api/v1/users/register
 // Frontend will be served at: http://localhost:8000/

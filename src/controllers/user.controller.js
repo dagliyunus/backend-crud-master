@@ -32,6 +32,7 @@ const registerUser = async (req, res) => {
         user: {id: user.id, email: user.email, username: user.username}
        })
     } catch (error) {
+        console.error("Registration error:", error); // Log error for debugging
         res.status(500).json({message: "Internal server error", error: error.message });
         
     }
@@ -67,8 +68,10 @@ const loginUser = async (req, res) => {
       })
         
     } catch (error) {
+        console.error("Login error:", error); // Log error for debugging
         res.status(500).json({
-            message: "Internal Server Error"
+            message: "Internal Server Error",
+            error: error.message
         })
     }
 }

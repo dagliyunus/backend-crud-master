@@ -1,219 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta tags for proper page rendering and SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Backend CRUD API Frontend - User Authentication and Post Management">
-    
-    <!-- Page title displayed in browser tab -->
-    <title>CRUD API Dashboard</title>
-    
-    <!-- Link to external stylesheet for styling -->
+    <meta name="description" content="Project Management System - Team Collaboration Platform">
+    <title>Project Management System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Main container that wraps all page content -->
     <div class="container">
         
-        <!-- Header section with application title and navigation -->
+        <!-- Header section -->
         <header class="header">
-            <h1 class="title">📝 CRUD API Dashboard</h1>
-            <p class="subtitle">User Authentication & Post Management System</p>
+            <h1 class="title"> Project Management System</h1>
+            <p class="subtitle">Team Collaboration & Project Management Platform</p>
         </header>
 
-        <!-- Authentication section - shown when user is not logged in -->
+        <!-- Authentication section -->
         <section id="authSection" class="auth-section">
-            
-            <!-- Tab buttons to switch between login and register forms -->
             <div class="tab-buttons">
                 <button class="tab-btn active" data-tab="login">Login</button>
                 <button class="tab-btn" data-tab="register">Register</button>
             </div>
 
-            <!-- Login form container -->
             <div id="loginForm" class="form-container active">
                 <h2>Welcome Back</h2>
-                <p class="form-description">Sign in to your account to manage posts</p>
-                
-                <!-- Login form with email and password fields -->
+                <p class="form-description">Sign in to manage your projects</p>
                 <form id="loginFormElement" class="form">
-                    <!-- Email input field -->
                     <div class="form-group">
                         <label for="loginEmail">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="loginEmail" 
-                            placeholder="Enter your email" 
-                            required
-                            autocomplete="email"
-                        >
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required autocomplete="email">
                     </div>
-                    
-                    <!-- Password input field -->
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input 
-                            type="password" 
-                            id="loginPassword" 
-                            placeholder="Enter your password" 
-                            required
-                            autocomplete="current-password"
-                            minlength="6"
-                        >
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password" minlength="6">
                     </div>
-                    
-                    <!-- Submit button to trigger login -->
                     <button type="submit" class="btn btn-primary">Sign In</button>
                 </form>
             </div>
 
-            <!-- Registration form container -->
             <div id="registerForm" class="form-container">
                 <h2>Create Account</h2>
-                <p class="form-description">Register a new account to get started</p>
-                
-                <!-- Registration form with username, email, and password fields -->
+                <p class="form-description">Register to start managing projects</p>
                 <form id="registerFormElement" class="form">
-                    <!-- Username input field -->
                     <div class="form-group">
                         <label for="registerUsername">Username</label>
-                        <input 
-                            type="text" 
-                            id="registerUsername" 
-                            placeholder="Choose a username" 
-                            required
-                            autocomplete="username"
-                            minlength="1"
-                            maxlength="25"
-                        >
+                        <input type="text" id="registerUsername" placeholder="Choose a username" required autocomplete="username" minlength="1" maxlength="25">
                         <small>1-25 characters</small>
                     </div>
-                    
-                    <!-- Email input field -->
                     <div class="form-group">
                         <label for="registerEmail">Email Address</label>
-                        <input 
-                            type="email" 
-                            id="registerEmail" 
-                            placeholder="Enter your email" 
-                            required
-                            autocomplete="email"
-                        >
+                        <input type="email" id="registerEmail" placeholder="Enter your email" required autocomplete="email">
                     </div>
-                    
-                    <!-- Password input field -->
                     <div class="form-group">
                         <label for="registerPassword">Password</label>
-                        <input 
-                            type="password" 
-                            id="registerPassword" 
-                            placeholder="Create a password" 
-                            required
-                            autocomplete="new-password"
-                            minlength="6"
-                            maxlength="50"
-                        >
+                        <input type="password" id="registerPassword" placeholder="Create a password" required autocomplete="new-password" minlength="6" maxlength="50">
                         <small>6-50 characters</small>
                     </div>
-                    
-                    <!-- Submit button to trigger registration -->
                     <button type="submit" class="btn btn-primary">Create Account</button>
                 </form>
             </div>
         </section>
 
-        <!-- Main application section - shown when user is logged in -->
+        <!-- Main application section -->
         <section id="appSection" class="app-section hidden">
             
-            <!-- User info and logout button -->
-            <div class="user-bar">
-                <div class="user-info">
-                    <span class="user-greeting">Welcome, <strong id="currentUsername"></strong>!</span>
-                    <span class="user-email" id="currentUserEmail"></span>
-                </div>
-                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
-            </div>
-
-            <!-- Post management section -->
-            <div class="posts-container">
-                
-                <!-- Header for posts section with create button -->
-                <div class="posts-header">
-                    <h2>📋 Posts Management</h2>
-                    <button id="createPostBtn" class="btn btn-primary">+ Create New Post</button>
-                </div>
-
-                <!-- Modal overlay for create/edit post form -->
-                <div id="postModal" class="modal hidden">
-                    <div class="modal-content">
-                        <!-- Close button for modal -->
-                        <span class="close-modal">&times;</span>
-                        <h3 id="modalTitle">Create New Post</h3>
-                        
-                        <!-- Form for creating or editing posts -->
-                        <form id="postForm" class="form">
-                            <!-- Hidden field to store post ID when editing -->
-                            <input type="hidden" id="postId">
-                            
-                            <!-- Name input field -->
-                            <div class="form-group">
-                                <label for="postName">Name</label>
-                                <input 
-                                    type="text" 
-                                    id="postName" 
-                                    placeholder="Enter name" 
-                                    required
-                                >
-                            </div>
-                            
-                            <!-- Description textarea field -->
-                            <div class="form-group">
-                                <label for="postDescription">Description</label>
-                                <textarea 
-                                    id="postDescription" 
-                                    placeholder="Enter description" 
-                                    rows="4"
-                                    required
-                                ></textarea>
-                            </div>
-                            
-                            <!-- Age input field -->
-                            <div class="form-group">
-                                <label for="postAge">Age</label>
-                                <input 
-                                    type="number" 
-                                    id="postAge" 
-                                    placeholder="Enter age" 
-                                    required
-                                    min="1"
-                                    max="150"
-                                >
-                                <small>Must be between 1 and 150</small>
-                            </div>
-                            
-                            <!-- Form action buttons -->
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">Save Post</button>
-                                <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
-                            </div>
-                        </form>
+            <!-- Top navigation bar -->
+            <div class="top-nav">
+                <div class="nav-left">
+                    <div class="user-info">
+                        <span class="user-greeting">Welcome, <strong id="currentUsername"></strong>!</span>
+                        <span class="user-email" id="currentUserEmail"></span>
                     </div>
                 </div>
+                <div class="nav-right">
+                    <button id="notificationsBtn" class="btn btn-icon" title="Notifications">
+                        🔔 <span id="notificationBadge" class="badge hidden">0</span>
+                    </button>
+                    <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
 
-                <!-- Container for displaying all posts -->
-                <div id="postsList" class="posts-list">
-                    <!-- Posts will be dynamically inserted here by JavaScript -->
+            <!-- Main content tabs -->
+            <div class="main-tabs">
+                <button class="main-tab-btn active" data-tab="projects"> My Projects</button>
+                <button class="main-tab-btn" data-tab="invitations"> Invitations</button>
+                <button class="main-tab-btn" data-tab="posts"> Posts</button>
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="projectsTab" class="tab-content active">
+                <div class="section-header">
+                    <h2>My Projects</h2>
+                    <button id="createProjectBtn" class="btn btn-primary">+ Create Project</button>
+                </div>
+                <div id="projectsList" class="cards-grid">
+                    <div class="loading-message">Loading projects...</div>
+                </div>
+            </div>
+
+            <!-- Invitations Tab -->
+            <div id="invitationsTab" class="tab-content">
+                <div class="section-header">
+                    <h2>Invitations</h2>
+                    <div class="invitation-tabs">
+                        <button class="inv-tab-btn active" data-inv-tab="pending">Pending</button>
+                        <button class="inv-tab-btn" data-inv-tab="all">All</button>
+                    </div>
+                </div>
+                <div id="invitationsList" class="cards-grid">
+                    <div class="loading-message">Loading invitations...</div>
+                </div>
+            </div>
+
+            <!-- Posts Tab -->
+            <div id="postsTab" class="tab-content">
+                <div class="section-header">
+                    <h2>Posts Management</h2>
+                    <button id="createPostBtn" class="btn btn-primary">+ Create Post</button>
+                </div>
+                <div id="postsList" class="cards-grid">
                     <div class="loading-message">Loading posts...</div>
                 </div>
             </div>
         </section>
 
-        <!-- Message container for displaying success/error notifications -->
+        <!-- Project Modal -->
+        <div id="projectModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 id="projectModalTitle">Create New Project</h3>
+                <form id="projectForm" class="form">
+                    <input type="hidden" id="projectId">
+                    <div class="form-group">
+                        <label for="projectName">Project Name</label>
+                        <input type="text" id="projectName" placeholder="Enter project name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Description</label>
+                        <textarea id="projectDescription" placeholder="Enter project description" rows="4"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Project</button>
+                        <button type="button" class="btn btn-secondary" id="cancelProjectBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Project Details Modal -->
+        <div id="projectDetailsModal" class="modal hidden">
+            <div class="modal-content large">
+                <span class="close-modal">&times;</span>
+                <h3 id="projectDetailsTitle"></h3>
+                <div id="projectDetailsContent"></div>
+            </div>
+        </div>
+
+        <!-- Invite User Modal -->
+        <div id="inviteModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Invite User to Project</h3>
+                <form id="inviteForm" class="form">
+                    <input type="hidden" id="inviteProjectId">
+                    <div class="form-group">
+                        <label for="inviteeEmail">User Email</label>
+                        <input type="email" id="inviteeEmail" placeholder="Enter user email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inviteMessage">Message (Optional)</label>
+                        <textarea id="inviteMessage" placeholder="Add a personal message" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Send Invitation</button>
+                        <button type="button" class="btn btn-secondary" id="cancelInviteBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Create Task Modal -->
+        <div id="taskModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Create New Task</h3>
+                <form id="taskForm" class="form">
+                    <input type="hidden" id="taskProjectId">
+                    <div class="form-group">
+                        <label for="taskTitle">Task Title</label>
+                        <input type="text" id="taskTitle" placeholder="Enter task title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Description</label>
+                        <textarea id="taskDescription" placeholder="Enter task description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskAssignedTo">Assign To</label>
+                        <select id="taskAssignedTo" required>
+                            <option value="">Select team member...</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Create Task</button>
+                        <button type="button" class="btn btn-secondary" id="cancelTaskBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Post Modal -->
+        <div id="postModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 id="modalTitle">Create New Post</h3>
+                <form id="postForm" class="form">
+                    <input type="hidden" id="postId">
+                    <div class="form-group">
+                        <label for="postName">Name</label>
+                        <input type="text" id="postName" placeholder="Enter name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postDescription">Description</label>
+                        <textarea id="postDescription" placeholder="Enter description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="postAge">Age</label>
+                        <input type="number" id="postAge" placeholder="Enter age" required min="1" max="150">
+                        <small>Must be between 1 and 150</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Post</button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Notifications Panel -->
+        <div id="notificationsPanel" class="notifications-panel hidden">
+            <div class="notifications-header">
+                <h3>Notifications</h3>
+                <button id="markAllReadBtn" class="btn btn-small">Mark All Read</button>
+            </div>
+            <div id="notificationsList" class="notifications-list">
+                <div class="loading-message">Loading notifications...</div>
+            </div>
+        </div>
+
+        <!-- Message container -->
         <div id="messageContainer" class="message-container"></div>
     </div>
 
-    <!-- Link to external JavaScript file that handles all functionality -->
     <script src="app.js"></script>
 </body>
 </html>
